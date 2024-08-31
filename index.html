@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRON Token Transfer</title>
+</head>
+<body>
+    <h1>Transfer TRC20 Token</h1>
+    <form id="transferForm">
+        <label for="recipient">Recipient Address:</label><br>
+        <input type="text" id="recipient" name="recipient" required><br><br>
+        <label for="amount">Amount:</label><br>
+        <input type="number" id="amount" name="amount" step="0.000000000001" min="0" placeholder="0.000000000000" value="0.000000000000"><br><br>
+        <button type="button" id="increaseAmount">Increase Amount</button><br><br>
+        <button type="submit">Send Token</button>
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        const form = document.getElementById('transferForm');
+        const amountInput = document.getElementById('amount');
+        const increaseButton = document.getElementById('increaseAmount');
+
+        // ฟังก์ชันเพื่อจัดรูปแบบจำนวนให้มีทศนิยม 12 ตำแหน่ง
+        function formatAmount(value) {
+            return parseFloat(value).toFixed(12);
+        }
+
+        // จัดการการเพิ่มค่า
+        increaseButton.addEventListener('click', () => {
+            let currentAmount = parseFloat(amountInput.value);
+            let increaseValue = 0.000000000000;
+            let newAmount = formatAmount(currentAmount + increaseValue);
+            amountInput.value = newAmount;
+        });
+
+        // จัดการการส่งฟอร์ม
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // รับค่าจากฟิลด์ input
+            const recipient = document.getElementById('recipient').value;
+            const amount = formatAmount(document.getElementById('amount').value);
+
+            try {
+                // ส่งข้อมูลไปยังเซิร์ฟเวอร์
+                const response = await fetch('http://localhost:3000/send-token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ recipient, amount })
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Network response was not ok: ${errorText}`);
+                }
+
+                const result = await response.json();
+                document.getElementById('result').textContent = result.success 
+                    ? `Transaction successful! TxID: ${result.txId}` 
+                    : `Transaction failed: ${result.error}`;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>
