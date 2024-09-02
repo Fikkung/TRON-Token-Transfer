@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script>
+    <script defer src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <!-- ลบ style.scss ถ้าคุณไม่ใช้ SCSS หรือคอมไพล์เป็น CSS แล้ว -->
+    <title>TRON Token Transfer</title>
+</head>
+<body>
+    <div id="WebGL-output">
+        <div class="straight-line"></div>
+        <div class="side-menu">
+            <div id="menuBtn">
+                <input type="checkbox" />
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu">
+                <a class="menu-item" href="index.html">HOME</a>
+                <a class="menu-item" href="#">ABOUT US</a>
+                <a class="menu-item" href="transfer.html">TRON Token Transfer</a>
+                <a class="menu-item" href="create-wallet.html">Create New Wallet</a>
+                <a class="menu-item" href="#">CONTACT US</a>
+            </div>
+            <div class="straight-line"></div>
+           
+            <p id="result"></p>
+        </div>
+        <h1>Transfer TRC20 Token</h1>
+        <form id="transferForm">
+            <label for="recipient">Recipient Address:</label><br>
+            <input type="text" id="recipient" name="recipient" required><br><br>
+            <label for="amount">Amount:</label><br>
+            <input type="number" id="amount" name="amount" placeholder="0.000000000000"><br><br>
+            <button type="submit">Send Token</button>
+        </form>
+        
+    </div>
+</body>
+</html>
