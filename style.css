@@ -19,6 +19,9 @@ body {
 }
 
 .cursor {
+    cursor: pointer;  
+    z-index: 1;
+
   width: 40px;
   height: 40px;
   border: 3px solid white;
@@ -38,6 +41,7 @@ body {
   align-items: center;
 }
 .side-menu #menuBtn {
+  
   position: absolute;
   top: 25px;
   right: 25px;
@@ -223,6 +227,7 @@ body {
   width: 100%;
   height: 100%;
   position: absolute;
+  z-index: 0
 }
 
 .dg {
@@ -230,21 +235,48 @@ body {
 }
 /* ปรับสไตล์สำหรับฟอร์ม */
 #transferForm {
+  /* cursor: pointer; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* เคลื่อนที่กลับโดยครึ่งหนึ่งของความกว้างและความสูง */
+  z-index: 1; /* อยู่ด้านบน canvas */
   background: rgba(0, 0, 0, 0.8); /* พื้นหลังบางๆ เพื่อให้ฟอร์มเด่นขึ้น */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   color: white; /* ตัวหนังสือสีขาว */
   font-family: "Fira Mono", monospace; /* ใช้ฟอนต์เดียวกับที่ใช้ในเว็บ */
+  text-align: center; /* จัดตำแหน่งข้อความในฟอร์มให้ตรงกลาง */
 }
 
 /* เพิ่มขอบสีขาวให้กับข้อความ */
 #transferForm label, #transferForm input, #transferForm button {
   text-shadow: 0 0 2px #fff, 0 0 5px #fff; /* เพิ่มเอฟเฟกต์ขอบสีขาว */
 }
+/* ให้ <h1> มีเอฟเฟกต์ขอบสีขาว */
+h1 {
+  text-shadow: 0 0 2px #fff, 0 0 5px #fff;
+  padding: 10px 20px; /* เพิ่มเอฟเฟกต์ขอบสีขาว */
+}
+
+/* ให้ <label>, <input>, และ <button> มีเอฟเฟกต์ขอบสีขาว */
+label, input, button {
+  text-shadow: 0 0 2px #fff, 0 0 5px #fff; /* เพิ่มเอฟเฟกต์ขอบสีขาว */
+}
+
+/* ปรับสไตล์สำหรับ <input> และ <button> หากต้องการ */
+input, button {
+  border: 1px solid #fff; /* ขอบสีขาว */
+  background-color: transparent; /* พื้นหลังโปร่งใส */
+  color: #fff; /* ตัวหนังสือสีขาว */
+  padding: 5px; /* การจัดระเบียบของขอบ */
+  font-family: "Fira Mono", monospace; /* ใช้ฟอนต์เดียวกับที่ใช้ในเว็บ */
+}
 
 /* ปรับปุ่มให้ดูดีขึ้น */
 #transferForm button {
+  
   background: #333;
   color: white;
   border: 1px solid white;
@@ -256,4 +288,27 @@ body {
 
 #transferForm button:hover {
   background: #555;
+}
+/* ปรับสไตล์ของปุ่ม "Create Wallet" */
+#createWallet {
+  background: #333; /* พื้นหลังสีเทาเข้ม */
+  color: white; /* ตัวหนังสือสีขาว */
+  border: 1px solid white; /* ขอบสีขาว */
+  padding: 10px 20px; /* ขนาด padding */
+  border-radius: 5px; /* มุมโค้งมน */
+  cursor: pointer; /* ตัวชี้เป็นมือ */
+  transition: background 0.3s, transform 0.2s; /* การเปลี่ยนแปลงสีพื้นหลังและการขยายขนาด */
+}
+
+#createWallet:hover {
+  background: #555; /* เปลี่ยนสีพื้นหลังเมื่อ hover */
+  transform: scale(1.05); /* ขยายขนาดปุ่มเล็กน้อย */
+}
+
+/* สไตล์สำหรับข้อความผลลัพธ์ */
+#walletResult {
+  color: #fff; /* ตัวหนังสือสีขาว */
+  margin-top: 10px; /* ระยะห่างด้านบน */
+  font-size: 16px; /* ขนาดตัวอักษร */
+  text-shadow: 0 0 2px #fff, 0 0 5px #fff; /* เอฟเฟกต์ขอบสีขาว */
 }

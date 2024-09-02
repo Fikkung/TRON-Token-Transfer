@@ -3,13 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create New Wallet</title>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script defer src="https:////cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+    <script defer src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <!-- ลบ style.scss ถ้าคุณไม่ใช้ SCSS หรือคอมไพล์เป็น CSS แล้ว -->
+    <title>Create New Walle</title>
 </head>
 <body>
-    <h1>Create New Wallet</h1>
-    <button id="createWallet">Create Wallet</button>
-    <p id="walletResult"></p>
+    <div id="WebGL-output">    </div>
+        <div class="straight-line"></div>
+        <div class="side-menu">
+            <div id="menuBtn">
+                <input type="checkbox" />
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu">
+                <a class="menu-item" href="index.html">HOME</a>
+                <a class="menu-item" href="#">ABOUT US</a>
+                <a class="menu-item" href="transfer.html">TRON Token Transfer</a>
+                <a class="menu-item" href="create-wallet.html">Create New Wallet</a>
+                <a class="menu-item" href="#">CONTACT US</a>
+            </div>
+            <div class="straight-line"></div>
+           
+            <p id="result"></p>
+        </div>
 
-    <script src="main.js"></script>
+        <form id="transferForm">
+            <h1>Create New Wallet</h1>
+            <button id="createWallet">Create Wallet</button>
+            <p id="walletResult"></p>
+        </form>
+              <div class="cursor"></div>
+
 </body>
 </html>

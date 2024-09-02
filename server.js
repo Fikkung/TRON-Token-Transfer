@@ -32,18 +32,15 @@ app.post('/send-token', async (req, res) => {
     const { recipient, amount } = req.body;
 
     try {
-        // แปลง amount จากหน่วย TRC20 เป็น SUN
-        const amountInSun = tronWeb.toSun(amount);
-        console.log('Amount in Sun:', amountInSun); // ตรวจสอบค่าที่แปลงแล้ว
-
         const contract = await tronWeb.contract().at(contractAddress);
-        const result = await contract.transfer(recipient, amountInSun).send();
+        const result = await contract.transfer(recipient, tronWeb.toSun(amount)).send(); // อาจไม่ต้องแปลงเป็น SUN
         res.json({ success: true, txId: result });
     } catch (error) {
         console.error('Error sending token:', error);
         res.status(500).json({ success: false, error: error.message });
     }
 });
+
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');

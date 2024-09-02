@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const transferForm = document.getElementById('transferForm');
     const createWalletButton = document.getElementById('createWallet');
+    const resultElement = document.getElementById('result');
 
     if (transferForm) {
         transferForm.addEventListener('submit', async (e) => {
@@ -24,15 +25,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 const result = await response.json();
-                document.getElementById('result').textContent = result.success 
-                    ? `Transaction successful! TxID: ${result.txId}` 
-                    : `Transaction failed: ${result.error}`;
+                if (result.success) {
+                    resultElement.textContent = `Transaction successful! TxID: ${result.txId}`;
+                    alert(`Transaction successful! TxID: ${result.txId}`);
+                } else {
+                    resultElement.textContent = `Transaction failed: ${result.error}`;
+                }
             } catch (error) {
                 console.error('Error:', error);
-                document.getElementById('result').textContent = `Error: ${error.message}`;
+                resultElement.textContent = `Error: ${error.message}`;
             }
         });
     }
+
+
+
 
     if (createWalletButton) {
         createWalletButton.addEventListener('click', async () => {
@@ -59,15 +66,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    function formatAmount(value) {
+        // แปลงค่าจาก string เป็น float
+        const floatValue = parseFloat(value);
+
+        // แปลงเป็น string และเติมทศนิยมให้ครบ 12 ตำแหน่ง
+        const formattedValue = floatValue.toFixed(12);
+
+        // ลบจุดทศนิยมเพื่อให้เป็นจำนวนเต็ม
+        return formattedValue.replace('.', '');
+    }
 });
 
-function formatAmount(value) {
-    return parseFloat(value).toFixed(12);
-}
+
+
+
+
 let menuBtn = document.querySelector("#menuBtn");
 let curs = document.querySelector(".cursor");
 let menuItems = document.querySelectorAll(".menu-item");
 let mainText = document.querySelector(".mainText");
+let transferForm = document.querySelector("#transferForm");
+// let menuItems = document.querySelectorAll(".menu-item");
+
 
 document.addEventListener("mousemove", (e) => {
   let x = e.pageX;
