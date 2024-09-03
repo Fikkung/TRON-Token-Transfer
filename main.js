@@ -1,42 +1,46 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const transferForm = document.getElementById('transferForm');
-    const createWalletButton = document.getElementById('createWallet');
-    const resultElement = document.getElementById('result');
+  const transferForm = document.getElementById('transferForm');
+  const createWalletButton = document.getElementById('createWallet');
+  const resultElement = document.getElementById('result');
 
-    if (transferForm) {
-        transferForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+  if (transferForm) {
+      transferForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
 
-            const recipient = document.getElementById('recipient').value;
-            const amount = formatAmount(document.getElementById('amount').value);
+          const recipient = document.getElementById('recipient').value;
+          const amount = formatAmount(document.getElementById('amount').value);
 
-            try {
-                const response = await fetch('http://localhost:3000/send-token', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ recipient, amount })
-                });
+          try {
+              const response = await fetch('http://localhost:3000/send-token', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ recipient, amount })
+              });
 
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Network response was not ok: ${errorText}`);
-                }
+              if (!response.ok) {
+                  const errorText = await response.text();
+                  throw new Error(`Network response was not ok: ${errorText}`);
+              }
 
-                const result = await response.json();
-                if (result.success) {
-                    resultElement.textContent = `Transaction successful! TxID: ${result.txId}`;
-                    alert(`Transaction successful! TxID: ${result.txId}`);
-                } else {
-                    resultElement.textContent = `Transaction failed: ${result.error}`;
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                resultElement.textContent = `Error: ${error.message}`;
-            }
-        });
-    }
+              const result = await response.json();
+              if (result.success) {
+                  resultElement.textContent = `Transaction successful! TxID: ${result.txId}`;
+                  alert(`Transaction successful! TxID: ${result.txId}`);
+                  window.location.reload(); // รีเฟรชหน้าจอหลังจากกดตกลง
+              } else {
+                  resultElement.textContent = `Transaction failed: ${result.error}`;
+              }
+          } catch (error) {
+              console.error('Error:', error);
+              resultElement.textContent = `Error: ${error.message}`;
+          }
+      });
+  }
+
+
+
 
 
 
